@@ -1,0 +1,59 @@
+Required Feilds for Staffs: (Add Staff)
+First name
+Last Name
+Phone no.
+Email
+Emp ID
+Address Line 1
+address Line 2
+Pin/post code
+city
+dist
+state
+country
+Password
+role :- admin
+	manager
+status :- active
+	  inactive
+
+Database Structure
+id: 1
+first_name
+last_name
+phone_no
+email
+emp_id
+address_line_1
+address_line_2
+Pin_code
+city
+dist
+state
+country
+password
+designation
+role
+status(active)
+added_on (current time stamp)
+added_by (parent_user)
+
+Requirements
+1. Login
+2. Able to add/view/modify/delete staff user
+3. Logout
+
+Changes to be made
+top margin - remove {dashboard - language}				(done)
+	   - Welcome $user
+	   - hi user name {kt-user}					(done)
+In hi Admin - remove recent noti.. & add sign out button(log out)	(done)
+Right layout builder -> remove						(done)
+recent activities & new arrivals in dash				(done)
+
+User db       - User {list datatable} replace applications
+list datatale - replace customer -> staff name
+		country          -> contact no
+		ship date        -> emp id
+		company          -> designation
+		action 		 -> 1st icon -> view(eye)
