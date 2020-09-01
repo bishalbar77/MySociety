@@ -107,24 +107,30 @@
 		<div class="card-body">
             <form id="clear">
                 <div class="row">
-                                   
-					<div class="col-lg-3 mb-lg-0 mb-6">
+				<div class="col-lg-3 mb-lg-0 mb-6">
                         <div class="form-group" id="filter_col0" data-column="0">
+                            <label>Ticket Number</label>
+                            <input type="text" name="Name" class="form-control column_filter" id="col0_filter" placeholder="Ticket Number">
+                        </div>
+                    </div>
+
+					<div class="col-lg-3 mb-lg-0 mb-6">
+                        <div class="form-group" id="filter_col0" data-column="1">
                             <label>Name</label>
-                            <input type="text" name="Name" class="form-control column_filter" id="col0_filter" placeholder="Name">
+                            <input type="text" name="Name" class="form-control column_filter" id="col1_filter" placeholder="Name">
                         </div>
                     </div>
 				 <!--Email-->
 				 <div class="col-lg-3 mb-lg-0 mb-6">
-                        <div class="form-group" id="filter_col1" data-column="1">
+                        <div class="form-group" id="filter_col1" data-column="2">
                             <label>Phone</label>
-                            <input type="text" name="Phone" class="form-control column_filter" id="col1_filter" placeholder="Phone">
+                            <input type="text" name="Phone" class="form-control column_filter" id="col2_filter" placeholder="Phone">
                         </div>
                     </div>
 					<div class="col-lg-3 mb-lg-0 mb-6">
-                        <div class="form-group" id="filter_col0" data-column="2">
+                        <div class="form-group" id="filter_col0" data-column="3">
                             <label>Flat No</label>
-                            <input type="text" name="Flat No" class="form-control column_filter" id="col2_filter" placeholder="Flat No">
+                            <input type="text" name="Flat No" class="form-control column_filter" id="col3_filter" placeholder="Flat No">
                         </div>
                     </div>
 				 <!--phone-->
@@ -148,6 +154,7 @@
 										<table class="table table-bordered table-hover table-checkable" id="ex" class="display" style="width:100%">
 										<thead>
     <tr>
+		<th scope="col">Ticket No.</th>
       <th scope="col">Name</th>
       <th scope="col">Phone</th>
 	  <th scope="col">Flat No.</th>
@@ -155,12 +162,14 @@
 	  <th scope="col">Resident Type</th>
 	  <th scope="col">Subject</th>
 	  <th scope="col">Status</th>
+	  <th scope="col">Date</th>
 	  <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
   @foreach($rent as $rent)
   <tr>
+	  <td>{{ $rent->ticket }}</td>
       <td>{{ $rent->name }}</td>
       <td>{{ $rent->phone }}</td>
 	  <td>{{ $rent->flat_no }}</td>
@@ -176,6 +185,7 @@
 		<span class="label label-lg font-weight-bold label-light-danger label-inline">Closed</span>
 		@endif
 	  </td>
+	  <td>{{ strftime("%d %b %Y",strtotime($rent->created_on)) }}</td>
 	  <td><a href="#" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" data-toggle="modal" data-target="#exampleModal" title="View">
 		<i class="far fa-eye text-info"></i></a>
 		<a href="{{ route('ticket.changestatus', $rent->id )}}" type="submit" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Delete">								

@@ -7,7 +7,7 @@
 <!--begin::Card-->
 <div class="card">
 <div class="card-header">
-<h3 class="card-title">Add Society Staffs</h3>
+<h3 class="card-title">Add Resident Details</h3>
 </div>
 <!--begin::Form-->
     <form class="form"  method="POST" action="/storeowner">

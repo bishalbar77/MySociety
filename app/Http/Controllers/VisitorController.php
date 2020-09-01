@@ -39,8 +39,9 @@ class VisitorController extends Controller
     {
         $visitor = new Visitor;
         $visitor->name = $request->name;
-        $visitor->getpass = "GATEPASS" . rand(100,9999);
+        $visitor->getpass = "PASS" . rand(100,9999);
         $visitor->email = $request->email;
+        $visitor->purpose = $request->purpose;
         $visitor->vehicle_no = $request->vehicle_no;
         $visitor->flat_no = $request->flat_no;
         $visitor->phone = $request->phone;

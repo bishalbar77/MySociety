@@ -30,7 +30,7 @@
 <div class="row justify-content-center">
 <div class="col-xl-12">
 <div class="my-5 step" data-wizard-type="step-content" data-wizard-state="current">
-<h5 class="text-dark font-weight-bold mb-10">Rent Payment Information</h5>
+<h5 class="text-dark font-weight-bold mb-10">Add Payment Information</h5>
 
 
 

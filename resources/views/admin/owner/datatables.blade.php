@@ -54,8 +54,8 @@
 								<div class="card card-custom">
 								<div class="card-header flex-wrap py-5">
 										<div class="card-title">
-											<h3 class="card-label">Staff Datatable
-											<div class="text-muted pt-2 font-size-sm">All staff are listed below</div></h3>
+											<h3 class="card-label">Resident Datatable
+											<div class="text-muted pt-2 font-size-sm">All residents are listed below</div></h3>
 										</div>
 									</div>
 									<div class="card-body">
@@ -74,23 +74,17 @@
 				 <!--Email-->
 				 <div class="col-lg-3 mb-lg-0 mb-6">
                         <div class="form-group" id="filter_col1" data-column="1">
-                            <label>Phone</label>
-                            <input type="text" name="Phone" class="form-control column_filter" id="col1_filter" placeholder="Phone">
+                            <label>Email</label>
+                            <input type="text" name="Phone" class="form-control column_filter" id="col1_filter" placeholder="Email">
                         </div>
                     </div>
 					<div class="col-lg-3 mb-lg-0 mb-6">
                         <div class="form-group" id="filter_col0" data-column="2">
-                            <label>Flat No</label>
-                            <input type="text" name="Flat No" class="form-control column_filter" id="col2_filter" placeholder="Flat No">
+                            <label>Flat Number</label>
+                            <input type="text" name="Flat No" class="form-control column_filter" id="col2_filter" placeholder="Flat Number">
                         </div>
                     </div>
-				 <!--phone-->
-					<div class="col-lg-3 mb-lg-0 mb-6">
-                        <div class="form-group" id="filter_col0" data-column="3">
-                            <label>Vehicle No.</label>
-                            <input type="phone" name="Vehicle No." class="form-control column_filter" id="col3_filter" placeholder="Vehicle Number">
-                        </div>
-                    </div>
+				 
             </div>
               
                 </form>
@@ -113,6 +107,8 @@
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
+	  <th scope="col">Flat No.</th>
+	  <th scope="col">Owner</th>
       <th scope="col">Contact no.</th>
 	  <th scope="col">Role</th>
       <th scope="col">Type</th>
@@ -126,6 +122,8 @@
   <tr>
       <th scope="row">{{ $user->name }} {{ $user->ltname }}</th>
       <td>{{ $user->email }}</td>
+	  <td>{{ $user->flat_no }}</td>
+	  <td>{{ $user->owner ? : $user->name }}</td>
       <td>{{ $user->phone }}</td>
 	  <td>{{ implode(',', $user->roles()->get()->pluck('name')->toArray()) }}</td>
 	  <td>{{ $user->type }}</td>

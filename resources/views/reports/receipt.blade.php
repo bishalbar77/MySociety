@@ -66,11 +66,12 @@ th {
                     <address>
                         <strong>{{ $sale->name }}</strong>
                         <br />
+                        {{ $sale->flat_no }}
+                        <br />
                         {{ $sale->email }}
                         <br />
-                        Los Angeles, CA 90026
-                        <br />
-                        <abbr title="Phone">P:</abbr> (213) 484-6829
+                        
+                        <abbr title="Phone">Contact:</abbr> {{ $sale->phone }}
                     </address>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 text-right">
@@ -90,40 +91,40 @@ th {
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Flat Description</th>
-                            <th>Months</th>
-                            <th class="text-center">Paid</th>
-                            <th class="text-center">Total({{ $sale->month}} months)</th>
+                            <th>Payment Type</th>
+                            <th>Payment Mode</th>
+                            <th>Payment Duration</th>
+                            <th>Date</th>
+                            <th class="text-center">Amount</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="col-md-9"><em>{{ $sale->flat_no }} </em></td>
+                            <td class="col-md-9"><em>{{ $sale->remark }} </em></td>
+                            <td class="col-md-1" style="text-align: center">{{ $sale->ddl_payment}}</td>
                             <td class="col-md-1" style="text-align: center"> {{ $sale->month}} months</td>
-                            <td class="col-md-1" style="text-align: center">{{ $sale->txt_amount}}</td>
+                            <td class="col-md-1" style="text-align: center"> {{strftime("%d %b %Y",strtotime($sale->txt_dat))}}</td>
                             <td class="col-md-1" style="text-align: center">{{ $sale->txt_amount}}</td>
                         </tr>
                         <tr>
                             <td>   </td>
                             <td>   </td>
+                            <td></td>
                             <td class="text-right"  style="text-align: center">
                             <p>
                                 <strong>Subtotal: </strong>
                             </p>
-                            <p>
-                                <strong>Tax: </strong>
-                            </p></td>
+                            </td>
                             <td class="text-center"  style="text-align: center">
                             <p>
                                 <strong>Rs. {{ $sale->txt_amount}}</strong>
                             </p>
-                            <p>
-                                <strong>Rs. 00.00</strong>
-                            </p></td>
+                           </td>
                         </tr>
                         <tr>
                             <td>   </td>
                             <td>   </td>
+                            <td></td>
                             <td class="text-right"  style="text-align: center"><h4><strong>Total: </strong></h4></td>
                             <td class="text-center text-danger"  style="text-align: center"><h4><strong>Rs. {{ $sale->txt_amount}}</strong></h4></td>
                         </tr>

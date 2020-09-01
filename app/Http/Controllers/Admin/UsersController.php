@@ -48,10 +48,12 @@ class UsersController extends Controller
         ]);
     }
 
+    
+
     public function securitycreate()
     {
         $roles = Role::all();
-        $page_title = 'Security Registration';
+        $page_title = 'Staff Registration';
         return view('admin.staff.create', compact('page_title'))->with([
             'roles' => $roles,
         ]);

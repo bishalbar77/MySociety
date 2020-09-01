@@ -94,6 +94,10 @@
 											<label>Visiting Flat Number</label>
 											<input type="text" class="form-control" name="flat_no" />
 											</div>
+											<div class="col-lg-12 pb-3">
+											<label>Purpose of Visit</label>
+											<input type="text" class="form-control" name="purpose" />
+											</div>
 											</div>
 											</div>
 											<div class="modal-footer">
@@ -172,6 +176,7 @@
       <th scope="col">Phone</th>
 	  <th scope="col">Flat No.</th>
       <th scope="col">Vehicle No.</th>
+	  <th scope="col">Purpose</th>
 	  <th scope="col">In Time</th>
 	  <th scope="col">Out Time</th>
 	  <th scope="col">Date</th>
@@ -186,6 +191,7 @@
       <td>{{ $visitors->phone }}</td>
 	  <td>{{ $visitors->flat_no }}</td>
 	  <td>{{ $visitors->vehicle_no }}</td>
+	  <td>{{ $visitors->purpose }}</td>
 	  <td>{{ $visitors->in_time }}</td>
 	  <td>
 	  @if($visitors->out_time!='')

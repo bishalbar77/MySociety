@@ -20,6 +20,7 @@ class CreateVisitorsTable extends Migration
             $table->string('email')->nullable();
             $table->string('vehicle_no')->nullable();
             $table->string('flat_no');
+            $table->string('purpose');
             $table->string('phone');
             $table->timestamp('in_time');
             $table->timestamp('out_time')->nullable();

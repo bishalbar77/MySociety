@@ -19,6 +19,7 @@ class CreateComplainsTable extends Migration
             $table->string('email');
             $table->string('flat_no');
             $table->string('phone');
+            $table->string('ticket');
             $table->string('issue');
             $table->string('type');
             $table->string('subject');

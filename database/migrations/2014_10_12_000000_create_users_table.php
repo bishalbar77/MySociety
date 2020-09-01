@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('ownership')->nullable();
+            $table->string('owner')->nullable();
             $table->string('flat_no')->nullable();
             $table->string('ltname');
             $table->string('country');
@@ -31,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('type')->default('Management');
+            $table->integer('is_vacant')->default(1);
             $table->integer('is_active')->default(1);
             $table->rememberToken();
             $table->timestamps();

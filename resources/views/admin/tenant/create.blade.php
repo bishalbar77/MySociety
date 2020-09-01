@@ -7,10 +7,10 @@
 <!--begin::Card-->
 <div class="card">
 <div class="card-header">
-<h3 class="card-title">Add Tenant Details</h3>
+<h3 class="card-title">Add Resident Details</h3>
 </div>
 <!--begin::Form-->
-    <form class="form"  method="POST" action="{{ route('register') }}">
+    <form class="form"  method="POST" action="/storetenant">
     @csrf
         <div class="card-body">
             <div class="form-group row">
@@ -147,30 +147,30 @@
             </div>
             <!--end::Group-->
             <div class="col-lg-4">
-            <label>Flat No.</label>
-            <select class="form-control is-invalid @enderror" name="flat_no" id="kt_select2_1"> 
-                    <option>Select Flat No.</option>
-                    <option>O+</option>
-                    <option>O-</option>
-                    <option>A+</opton>
-                    <option>A-</opton>
-                    <option>B+</opton>
-                    <option>B-</opton>
-                    <option>AB+</opton>
-                    <option>AB-</opton>
-                    <option>other</option>
+            <label>Role:</label>
+            <select class="form-control form-control-solid" name="roles[]" id="kt_select2_2" required>
+                    @foreach($roles as $role)
+                    @if ($role->id!=4)
+						@continue
+					@endif
+                        <option value="{{ $role-> id }}">{{ $role->name }}</option>
+                    @endforeach
                 </select>
+				</div>
             </div>
+            <div class="form-group row">
             <div class="col-lg-4">
-                <label>Ownership:</label><br>
-                <input type="radio" name="ownership" value="Living" checked>
-                <label>Living</label>&nbsp;
-                <input type="radio" name="ownership" value="Rent">
-                <label>Rent</label>&nbsp;
-
+            <label>Flat No.</label>
+            <select class="form-control  form-control-solid @error('flat_no') is-invalid @enderror" name="flat_no" id="kt_select2_1"> 
+            <option>Select Flat</option>
+            @foreach($user as $users)
+            @if($users->ownership=='Rent' && $users->is_vacant==1)
+            <option value="{{ $users->flat_no}}">{{ $users->flat_no}}</option>
+            @endif
+            @endforeach
             </div>
             </div>
-            
+            <input type="hidden" name="type" value="Staff">
             <div class="card-footer">
             <div class="row">
             <div class="col-lg-4"></div>

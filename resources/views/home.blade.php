@@ -12,14 +12,7 @@
 
         <div class="col-xxl-8 order-2 order-xxl-1">
             @include('pages.widgets._widget-6', ['class' => 'card-stretch gutter-b'])
-        </div>
-        
-        
-    
-
-
-                                  
-                                
+        </div>                         
 </div>
 @endsection
 {{-- Scripts Section --}}

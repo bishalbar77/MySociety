@@ -22,6 +22,7 @@ class ComplainController extends Controller
         $rent->name = $request->name;
         $rent->email = $request->email;
         $rent->phone = $request->phone;
+        $rent->ticket = "TIKR000" . rand(100,9999);
         $rent->flat_no = $request->flat_no;
         $rent->issue = $request->issue;
         $rent->type = $request->type;
