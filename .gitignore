@@ -1,7 +1,4 @@
 /node_modules
-/public/css
-/public/media
-/public/plugins
 /storage/*.key
 /vendor
 .env.backup
