@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
-use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
-use App\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -40,7 +39,11 @@ class RegisterController extends Controller
      *
      * @return void
      */
-  
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -51,17 +54,9 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'string', 'max:13', 'unique:users'],
-            'dob' => ['required', 'string', 'max:255'],
-            'ltname' => ['required', 'string', 'max:255'],
-            'district' => ['required', 'string', 'max:255'],
-            'country' => ['required', 'string', 'max:255'],
-            'state' => ['required', 'string', 'max:255'],
-            'city' => ['required', 'string', 'max:255'],
-            'pincode' => ['required', 'string', 'max:255'],
-            'add' => ['required', 'string', 'max:255'],
-            'type' => '',
+            'mobile' => ['required', 'max:13', 'unique:users'],
+            'email' => '',
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -73,33 +68,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
-            'dob' => $data['dob'],
-            'district' => $data['district'],
+        $apiKeys = 'FNgq0fsKbZjiqZrTCev3icyevDhr1v1JnboI5z6fdHHgAfRD8Vb7kvBu7XJq3d6Ajc2TpBiF93YC7GEoKUnqNdezGr9TM7IfrRAJnPL4SFPGY9rBTX40Jq76VjeBzNlVGSGtBAl2K3GS10jJuhBetCfEm9llof9xFRe33vMyF8Dhzrq7K6EeTjbEOu2AK4vCxvpJCtRg';
+        $response = Http::post('https://api.mysociety.com/api/register-employer', [
             'email' => $data['email'],
-            'phone' => $data['phone'],
-            'country' => $data['country'],
-            'state' => $data['state'],
-            'city' => $data['city'],
-            'pincode' => $data['pincode'],
-            'add' => $data['add'],
-            'type' => $data['type'] ? : '',
-            'ltname' => $data['ltname'],
-            'password' => Hash::make('admin'),
+            'first_name' => $data['name'],
+            'source_name' => 'B2B',
+            'device_id' => '00000000-89ABCDEF-01234567-89ABCDEH',
+            'dob' => '2000-11-22',
+            'mac_address' => '00:00:00:00',
+            'gender' => 'M',
+            'employer_type' => 'SCHOOL',
+            'mobile' => $data['mobile'],
+            'password' => Hash::make($data['password']),
+            'api_key' => $apiKeys,
         ]);
-        $role = $data['roles'];
-        $user->roles()->attach($role);
-        return $user;
-    }
+        $contents = $response->getBody();
+        // dd($response);
+        $data = json_decode($contents);
 
-    public function register(Request $request)
-    {
-        
-        $this->validator($request->all())->validate();
-        event(new Registered($user = $this->create($request->all())));
-        $user->roles()->sync($request->roles);
-        return $this->registered($request, $user)
-            ?: redirect($this->redirectPath('/'));
+        if($data->response->status != 200){
+            dd($data->response);
+        }
+        session()->put('first_name', $data->response->data->first_name);
+        session()->put('api_token', $data->response->data->api_token);
+        return redirect()->route('home');
+
     }
 }
